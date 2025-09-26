@@ -39,36 +39,36 @@ $(document).ready(function() {
 
 let currentTask = null;
 
-function changeTask(taskName, videoSrc1, videoSrc2, videoSrc3) {
+function changeTask(taskName) {
 
   const videoPlayer1 = document.getElementById('task-video-player-1');
   const videoPlayer2 = document.getElementById('task-video-player-2');
   const videoPlayer3 = document.getElementById('task-video-player-3');
+  const videoPlayer4 = document.getElementById('task-video-player-4');
+  const videoPlayer5 = document.getElementById('task-video-player-5');
+  const videoPlayer6 = document.getElementById('task-video-player-6');
+  const videoPlayer7 = document.getElementById('task-video-player-7');
+  const videoPlayer8 = document.getElementById('task-video-player-8');
   
-  if (videoPlayer1) {
-    videoPlayer1.src = videoSrc1;
-    
-    document.querySelectorAll('.task-selector .button').forEach(button => {
-      button.classList.remove('is-active');
-    });
-    
-    const clickedButton = document.querySelector(`.task-selector .button[onclick*="${taskName}"]`);
-    if (clickedButton) {
-      clickedButton.classList.add('is-active');
-    }
+  document.querySelectorAll('.task-selector .button').forEach(button => {
+    button.classList.remove('is-active');
+  });
+  
+  const clickedButton = document.querySelector(`.task-selector .button[onclick*="${taskName}"]`);
+  if (clickedButton) {
+    clickedButton.classList.add('is-active');
   }
-  if (videoPlayer2) {
-    if (videoSrc2 === null) {
-      document.getElementById('task-video-item-2').style.display = 'none';
-    }
-    else {
-      document.getElementById('task-video-item-2').style.display = 'block';
-    }
-    videoPlayer2.src = videoSrc2;
-  }
-  if (videoPlayer3) {
-    videoPlayer3.src = videoSrc3;
-  }
+
+  videoPlayer1.src = 'static/videos/' + taskName + '/target_only/sample1.mp4';
+  videoPlayer2.src = 'static/videos/' + taskName + '/target_only/sample2.mp4';
+  videoPlayer3.src = 'static/videos/' + taskName + '/target_only/sample3.mp4';
+  videoPlayer4.src = 'static/videos/' + taskName + '/target_only/sample4.mp4';
+
+  videoPlayer5.src = 'static/videos/' + taskName + '/co_train/sample1.mp4';
+  videoPlayer6.src = 'static/videos/' + taskName + '/co_train/sample2.mp4';
+  videoPlayer7.src = 'static/videos/' + taskName + '/co_train/sample3.mp4';
+  videoPlayer8.src = 'static/videos/' + taskName + '/co_train/sample4.mp4';
+  
   // Iterate through the video labels and mark them as 1x
   const videoLabels = document.querySelectorAll('.video-label');
   videoLabels.forEach(label => {
@@ -76,8 +76,33 @@ function changeTask(taskName, videoSrc1, videoSrc2, videoSrc3) {
   });
 }
 
+function changePolicy(policyName) {
+
+  document.querySelectorAll('.policy-selector .button').forEach(button => {
+    button.classList.remove('is-active');
+  });
+  
+  const clickedButton = document.querySelector(`.policy-selector .button[onclick*="${policyName}"]`);
+  if (clickedButton) {
+    clickedButton.classList.add('is-active');
+  }
+
+  const videoContainer1 = document.getElementById('task-video-1');
+  const videoContainer2 = document.getElementById('task-video-2');
+
+  if (policyName == "target_only") {
+    videoContainer1.style.display = 'block';
+    videoContainer2.style.display = 'none';
+  }
+  else if (policyName == "co_train") {
+    videoContainer1.style.display = 'none';
+    videoContainer2.style.display = 'block';
+  }
+
+}
 
 
-// document.addEventListener('DOMContentLoaded', (event) => {
-//   changeTask('task_1', 'static/videos/task_1_start.mp4', 'static/videos/task_1_mid.mp4', 'static/videos/task_1_last.mp4');
-// });
+document.addEventListener('DOMContentLoaded', (event) => {
+  changeTask('scene');
+  changePolicy('target_only')
+});

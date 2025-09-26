@@ -120,74 +120,160 @@
 </section>
 
 
-<!-- <section class="hero is-light is-small">
+<section class="is-light is-small">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full-width">
         <div class="publication-image">
-          <img src="static/images/teaser.png" alt="" width="100%">
+          <center>
+            <img src="static/images/teaser.png" alt="" width="50%">
+          </center>
         </div>
       </div>
     </div>
   </div>
-</section> -->
-<!-- <section class="hero teaser">
+</section>
+<section class="hero teaser">
   <div class="container is-fullhd">
     <div class="hero-body">
       <div class="columns is-centered">
         <div class="column is-full-width">
           <br>
-          <h2 class="subtitle has-text-centered">
-          Subtitle.
-          </h2>
+          <center>
+            <h2 class="subtitle has-text-centered" style="width: 80%"">
+              We develop RoboCade, a platform that gamifies the collection of robot demonstration datasets. In standard data collection approaches (top), hired operators or researchers collect demonstrations using in-person teleoperation, which requires access to a robot and can be tedious and time-consuming. RoboCade (bottom) is a remote data collection platform that integrates gamification into both system and task design, making robot data collection more engaging and accessible to a broader set of users.
+            </h2>
+          </center>
         </div>
       </div>
     </div>
   </div>
-</section> -->
+</section>
 
-<!-- <hr class="rounded"> -->
-<!-- 
+
+<hr class="rounded">
+
+
 <section class="section">
   <div class="container is-max-desktop">
 
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Sample Rollouts</h2>
+        <h2 class="title is-3">Key Findings</h2>        
+
+        <p style="text-align: left;">
+          <b>User Study Subjective Results.</b> We report user rankings for our RoboCade system compared to a non-gamified remote teleoperation interface. The GELLO controller is used in both conditions. Users tend to find the gamified interface more intuitive, enjoyable, and motivating. * and ** indicate significance at <i>p</i> < 0.05 and <i>p</i> < 0.01 respectively.
+          <br><br>
+          <center>
+            <img src="./static/images/user_study_likert.png" width="80%">
+          </center>
+          <br><br>
+        </p>
+        <p style="text-align: left;">
+          <b>Co-training with Gamified Data.</b> For our 3 target tasks, we compare the performance of Diffusion Policy (Chi et al. 2023) when trained only on target task data (<i>Target Only</i>) versus co-trained with gamified support tasks (<i>Co-train</i>), with a fixed training budget. For each task and training condition, we perform 25 trials and report staged success rate (%). Co-training improves success rate on all 3 tasks for in-distribution conditions (<i>In-Dist.</i>). For ScanBottle and PackBox, we additionally evaluate on out-of-distribution initial configurations (<i>Out-of-Dist</i>) and find that co-training improves generalization..
+          <br><br>
+          <img src="./static/images/policy_learning.png" width="100%">
+          <br><br>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<hr class="rounded">
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Sample Policy Rollouts</h2>
         <p>
-          Select one of the tasks below to view trajectories.
+          Select one of the target tasks and policy types below to view sample trajectories. We include both successes and failures.
           <br>
           <br>
         </p>
         <div class="content has-text-justified">
           <div class="task-selector has-text-centered">
-            <button class="button is-light" onclick="changeTask('lift', 'static/videos/task_1_start.mp4', 'static/videos/task_1_mid.mp4', 'static/videos/task_1_last.mp4')">Task 1</button>
-            <button class="button is-light" onclick="changeTask('can', 'static/videos/task_2_start.mp4', 'static/videos/task_2_mid.mp4', 'static/videos/task_2_last.mp4')">Task 2</button>
-            <button class="button is-light" onclick="changeTask('square', 'static/videos/task_3_start.mp4', 'static/videos/task_3_mid.mp4', 'static/videos/task_3_last.mp4')">Task 3</button>
-
+            <button class="button is-white"><b>Task:</b></button>
+            <button class="button is-light" onclick="changeTask('scene')">ArrangeDesk</button>
+            <button class="button is-light" onclick="changeTask('scan')">ScanBottle</button>
+            <button class="button is-light" onclick="changeTask('scan_ood')">ScanBottle (OOD)</button>
+            <button class="button is-light" onclick="changeTask('box')">PackBox</button>
+            <button class="button is-light" onclick="changeTask('box_ood')">PackBox (OOD)</button>
           </div>
-          
+          <br>
+          <div class="policy-selector has-text-centered">
+            <button class="button is-white"><b>Policy:</b></button>
+            <button class="button is-light" onclick="changePolicy('target_only')">Target Only</button>
+            <button class="button is-light" onclick="changePolicy('co_train')">Co-train</button>
+          </div>
+          <br>
           <center>
-            <div id="task-video" class="video-container">
+            <div id="task-video-1" class="video-container">
               <h4 id="video-title" class="video-title"></h4>
               <div class="video-wrapper">
-                <div class="video-item" id="task-video-item-1">
-                  <video id="task-video-player-1" autoplay loop muted controls>
-                    <source src="" type="video/mp4">
-                  </video>
-                  <div class="video-label">Beginning (1x)</div>
+                <div class="video-row">
+                  <div class="video-item" id="task-video-item-1">
+                    <video id="task-video-player-1" autoplay loop muted controls>
+                      <source src="" type="video/mp4">
+                    </video>
+                    <!-- <div class="video-label">Sample Success</div> -->
+                  </div>
+                  <div class="video-item" id="task-video-item-2">
+                    <video id="task-video-player-2" autoplay loop muted controls>
+                      <source src="" type="video/mp4">
+                    </video>
+                    <!-- <div class="video-label">Sample Success</div> -->
+                  </div>
                 </div>
-                <div class="video-item" id="task-video-item-2">
-                  <video id="task-video-player-2" autoplay loop muted controls>
-                    <source src="" type="video/mp4">
-                  </video>
-                  <div class="video-label">Middle (1x)</div>
+                <div class="video-row">
+                  <div class="video-item" id="task-video-item-3">
+                    <video id="task-video-player-3" autoplay loop muted controls>
+                      <source src="" type="video/mp4">
+                    </video>
+                    <!-- <div class="video-label">Sample Failure</div> -->
+                  </div>
+                  <div class="video-item" id="task-video-item-4">
+                    <video id="task-video-player-4" autoplay loop muted controls>
+                      <source src="" type="video/mp4">
+                    </video>
+                    <!-- <div class="video-label">Sample Failure</div> -->
+                  </div>
                 </div>
-                <div class="video-item" id="task-video-item-3">
-                  <video id="task-video-player-3" autoplay loop muted controls>
-                    <source src="" type="video/mp4">
-                  </video>
-                  <div class="video-label">End (1x)</div>
+              </div>
+            </div>
+            <div id="task-video-2" class="video-container">
+              <h4 id="video-title" class="video-title"></h4>
+              <div class="video-wrapper">
+                <div class="video-row">
+                  <div class="video-item" id="task-video-item-5">
+                    <video id="task-video-player-5" autoplay loop muted controls>
+                      <source src="" type="video/mp4">
+                    </video>
+                    <!-- <div class="video-label">Sample Success</div> -->
+                  </div>
+                  <div class="video-item" id="task-video-item-6">
+                    <video id="task-video-player-6" autoplay loop muted controls>
+                      <source src="" type="video/mp4">
+                    </video>
+                    <!-- <div class="video-label">Sample Success</div> -->
+                  </div>
+                </div>
+                <div class="video-row">
+                  <div class="video-item" id="task-video-item-7">
+                    <video id="task-video-player-7" autoplay loop muted controls>
+                      <source src="" type="video/mp4">
+                    </video>
+                    <!-- <div class="video-label">Sample Failure</div> -->
+                  </div>
+                  <div class="video-item" id="task-video-item-8">
+                    <video id="task-video-player-8" autoplay loop muted controls>
+                      <source src="" type="video/mp4">
+                    </video>
+                    <!-- <div class="video-label">Sample Failure</div> -->
+                  </div>
                 </div>
               </div>
             </div>
@@ -197,7 +283,7 @@
     </div>
 
   </div>
-</section> -->
+</section>
 
 <hr class="rounded">
 
