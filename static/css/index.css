@@ -18,13 +18,19 @@ video {
   margin-bottom: 10px;
 }
 
+.video-item{
+  margin: 10px;
+}
+
 .video-wrapper {
   position: relative;
   width: 100%;
+  display: flex;
 }
 
 .video-wrapper video {
-  width: 100%;
+  width: 95%;
+  display: flex;
 }
 
 .video-divider {
